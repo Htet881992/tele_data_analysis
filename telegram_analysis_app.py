@@ -13,7 +13,6 @@ API_HASH = os.getenv("TELEGRAM_API_HASH")
 
 SESSION_DIR = "sessions"
 os.makedirs(SESSION_DIR, exist_ok=True)
-os.chmod(SESSION_DIR, 0o777)
 
 st.set_page_config(page_title="Telegram Utilization Dashboard")
 st.title("📊 Telegram Utilization Dashboard")
@@ -35,8 +34,7 @@ if "logged" not in st.session_state:
 phone = st.text_input("Enter Telegram phone (with country code)")
 
 def create_client(phone):
-    safe_phone = phone.replace("+","").replace(" ","")
-    session_path = os.path.join(SESSION_DIR, f"session_{safe_phone}")
+    session_path = os.path.join(SESSION_DIR, phone.replace("+",""))
     return TelegramClient(session_path, API_ID, API_HASH)
 
 # ---------- ASYNC HELPERS ----------
