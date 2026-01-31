@@ -35,8 +35,8 @@ if "logged" not in st.session_state:
 phone = st.text_input("Enter Telegram phone (with country code)")
 
 def create_client(phone):
-safe_phone = phone.replace("+","").replace(" ","")
-session_path = os.path.join(SESSION_DIR, f"session_{safe_phone}")
+    safe_phone = phone.replace("+","").replace(" ","")
+    session_path = os.path.join(SESSION_DIR, f"session_{safe_phone}")
     return TelegramClient(session_path, API_ID, API_HASH)
 
 # ---------- ASYNC HELPERS ----------
